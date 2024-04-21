@@ -1,0 +1,24 @@
+{
+  "name": "oleng-mfe-utils",
+  "version": "1.0.0",
+  "description": "Utility for loading Micro Frontends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lrama1/oleng-mfe-utils.git"
+  },
+  "keywords": [
+    "MFE",
+    "Micro",
+    "Frontend"
+  ],
+  "author": "Lawrence Rama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lrama1/oleng-mfe-utils/issues"
+  },
+  "homepage": "https://github.com/lrama1/oleng-mfe-utils#readme"
+}
