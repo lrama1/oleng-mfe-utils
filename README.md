@@ -1,5 +1,7 @@
 # oleng-mfe-utils
 
+A utility which facilitates loading of Microfrontends during runtime.
+
 # Usage
 
 ```
