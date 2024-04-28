@@ -2,7 +2,7 @@
 
 A utility which facilitates loading of Microfrontends during runtime.
 
-# Usage
+# Usage for a React Host Application
 
 ```
 import React, { useState } from "react";
@@ -51,3 +51,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById("root"));
 
 ```
+
+# Usage for a Plain Javascript Host Application
+
+**_TBD_**

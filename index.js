@@ -22,7 +22,7 @@ async function loadRemoteModule({ url, scope, module }) {
   }
 
   if (Module && !Module.mount) {
-    alert("The module does not export a mount function");
+    console.log("The module does not export a mount function");
   }
 
   return Module;
