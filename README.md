@@ -5,48 +5,44 @@ A utility which facilitates loading of Microfrontends during runtime.
 # Usage for a React Host Application
 
 ```
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import ReactDOM from "react-dom";
-import { loadRemoteModule } from "./utils/mfeUtils";
+import { loadRemoteModule } from "oleng-mfe-utils";
 
-const ErrorMessage = () => <div>Failed to load remote module</div>;
+function App() {
+  const [RemoteComponent, setRemoteComponent] = useState(null);
+  const [error, setError] = useState(null);
 
-const App = () => {
-  const [RemoteModule, setRemoteModule] = useState(null);
-  const [hasError, setHasError] = useState(false);
-
-  async function init() {
-    try {
-      const remoteModule = await loadRemoteModule({
-        url: "http://localhost:8081/remoteEntry.js",
-        scope: "microfrontend",
-        module: "./Microfrontend",
+  useEffect(() => {
+    loadRemoteModule({
+      url: "http://localhost:9002/remoteEntry.js",
+      scope: "microfrontend",
+      module: "./Microfrontend",
+    })
+      .then((module) => {
+        setRemoteComponent(() => module.default);
+      })
+      .catch((err) => {
+        console.error("Error loading remote module:", err);
+        setError(err);
       });
-      setRemoteModule(() => remoteModule);
-    } catch (error) {
-      console.error("Failed to load remote module", error);
-      setHasError(true);
-    }
-  }
-
-  // Load the remote module when the component mounts
-  React.useEffect(() => {
-    init();
   }, []);
-
-  if (hasError) {
-    return <ErrorMessage />;
-  }
-
-  const MFE1 = RemoteModule ? RemoteModule.default : null;
 
   return (
     <div>
-      <h1>Hello, React App (host app)</h1>
-      <div>{MFE1 ? <MFE1 /> : "Loading remote module..."}</div>
+      <h1>Container</h1>
+      {error ? (
+        <div>Error loading remote component: {error.message}</div>
+      ) : RemoteComponent ? (
+        <Suspense fallback={<div>Loading...</div>}>
+          <RemoteComponent />
+        </Suspense>
+      ) : (
+        <div>Loading Remote Component...</div>
+      )}
     </div>
   );
-};
+}
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

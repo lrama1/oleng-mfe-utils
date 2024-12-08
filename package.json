@@ -1,6 +1,6 @@
 {
   "name": "oleng-mfe-utils",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "Utility for loading Micro Frontends",
   "main": "index.js",
   "scripts": {
